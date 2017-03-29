@@ -1,3 +1,3 @@
 # jquery.extras
 
-A library that extends jquery prototype with extra methods.
+A library that extends jquery with extra methods.
