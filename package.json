@@ -1,0 +1,27 @@
+{
+  "name": "jquery.extras",
+  "version": "0.0.1",
+  "description": "A library that extends jquery prototype with extra methods",
+  "main": "src/extras.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aptivator/jquery.extras.git"
+  },
+  "keywords": [
+    "jquery",
+    "extras",
+    "helpers"
+  ],
+  "author": "Dmitriy A. Nesterkin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aptivator/jquery.extras/issues"
+  },
+  "homepage": "https://github.com/aptivator/jquery.extras#readme",
+  "devDependencies": {
+    "jquery": "^3.2.1"
+  }
+}
