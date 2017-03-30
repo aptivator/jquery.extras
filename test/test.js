@@ -116,13 +116,23 @@ describe('jquery.extra', function() {
       expect(obj.description).to.equal(' A library that extends..   ');
     });
     
-    it('converts "naked" json into javascript object', function() {
-      let obj = "{selector: .main > table, another: true, age: 23.55, blank: }";
-      expect($.jsonify(obj)).to.eql({
+    it('converts "naked" json into javascript object', () => {
+      let json = "{selector: .main > table, another: true, age: 23.55, blank: }";
+      expect($.jsonify(json)).to.eql({
         selector: '.main > table', 
         another: true, 
         age: 23.55,
         blank: null
+      });
+    });
+    
+    it('supports regular json', () => {
+      let json = '{"first-name": "Dmitriy", "age": 37, "married": false, "address": null}';
+      expect($.jsonify(json)).to.eql({
+        'first-name': 'Dmitriy',
+        age: 37,
+        married: false,
+        address: null
       });
     });
   });
