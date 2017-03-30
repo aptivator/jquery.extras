@@ -105,7 +105,7 @@ describe('jquery.extra', function() {
     });
     
     it('replaces empty strings (\'\') and empty space with null', ()  => {
-      let json = '{age: \'\', enrolled: \"\", empty: }';
+      let json = '{age: \'\', enrolled: \"\", empty:}';
       let obj = $.jsonify(json);
       expect(obj).to.eql({age: null, enrolled: '', empty: null});
     });
