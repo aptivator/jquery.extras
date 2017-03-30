@@ -1,4 +1,4 @@
-let assert = require('assert');
+let {expect} = require('chai');
 let jsdom = require("jsdom");
 let path = require('path');
 let jqueryPath = path.resolve(__dirname, '../node_modules/jquery/dist/jquery.js');
@@ -23,7 +23,8 @@ describe('jquery.extra', function() {
   });
   
   
-  it('runs tests', function() {
-    assert.ok($.jsonify);
+  it('converts json-like structure to json and parses it', function() {
+    let obj = "{selector: '.main > table', 'another': true}";
+    expect($.jsonify(obj)).to.eql({selector: '.main > table', another: true});
   });
 });
