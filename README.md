@@ -120,8 +120,8 @@ let events = $('input').events();
 ```
 
 <span style = "font-size: 18px;">**`$.fn.hasEvent`**</span>: returns a specific 
-event configuration object if event handler has been registered; otherwise 
-returns `undefined`.
+event configuration object (for the first element in the selection) if an event 
+handler has been registered; otherwise returns `undefined`.
 
 ```javascript
 /* example.js */
