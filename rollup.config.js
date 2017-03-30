@@ -1,4 +1,4 @@
-import buble    from 'rollup-plugin-buble';
+import buble from 'rollup-plugin-buble';
 let packageJson = require('./package.json');
 let {'jsnext:main': jsnext, main} = packageJson;
 
@@ -17,10 +17,6 @@ export default {
   },
   external: ['jquery'],
   plugins: [
-    buble({
-      transforms: {
-        dangerousForOf: true
-      }
-    })
+    buble()
   ]
 };

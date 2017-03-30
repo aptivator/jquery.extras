@@ -1,4 +1,5 @@
 import $            from 'jquery';
+import id_          from './lib/id';
 import setterGetter from './lib/attr-setter-getter';
 import toRx         from './lib/to-rx';
 
@@ -52,6 +53,9 @@ $.extend($.fn, {
   },
   
   id(id) {
+    if(id === true) {
+      id = id_();
+    }
     return setterGetter(this.eq(0), 'id', id);
   },
   
