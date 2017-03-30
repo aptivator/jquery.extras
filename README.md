@@ -14,7 +14,7 @@ extensions to both static (`$`) and prototype (`$.fn`) objects.
 
 <span style = "font-size: 18px;">**`$.jsonify`**</span>: converts JSON and 
 "naked" JSON to a JavaScript object.  (To learn more about "naked" JSON, read the
-following [documentation])
+following [documentation]).
 
 ```html
 <!-- example.html -->
@@ -136,8 +136,8 @@ if($('input').hasEvent('click')) {
 
 <span style = "font-size: 18px;">**`$.fn.id`**</span>: gets a value of an `id`
 attribute, sets an `id` to some specified value, or sets an `id` to an 
-auto-generated unique value.  (the function will be applied to the first element
-in the selection)
+auto-generated unique value.  (The function will be applied to the first element
+in the selection).
 
 ```html
 <!-- example.html -->
