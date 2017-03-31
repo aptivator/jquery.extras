@@ -1,4 +1,4 @@
-import {empties, jsonPartRx, numStrRx, primitives} from './lib/vars';
+import {jsonPartRx, numStrRx, primitives} from './lib/vars';
 import {asStr, quote} from './lib/helpers';
 
 export default json => {
@@ -9,9 +9,9 @@ export default json => {
     part = part.trim();
     
     if(asStr(part)) {
-      part = quote(part.slice(1));
+      part = quote(part.slice(1).trim());
     } else if(!primitives.includes(part) && !numStrRx.test(part)) {
-      if(empties.includes(part)) {
+      if(!part.length) {
         part = 'null';
       } else {
         part = quote(part);

@@ -104,20 +104,23 @@ describe('jquery.extra', function() {
       expect(obj).to.eql({age: '22', enrolled: 'true', senior: 'null'});
     });
     
-    it('replaces empty strings (\'\') and empty space with null', ()  => {
-      let json = '{age: \'\', enrolled: \"\", empty:}';
+    it('replaces blank values with null', ()  => {
+      let json = '{age: , enrolled: "", empty:}';
       let obj = $.jsonify(json);
       expect(obj).to.eql({age: null, enrolled: '', empty: null});
     });
     
     it('keeps double-quote strings unchanges', () => {
-      let json = '{description: " A library that extends..   "}';
+      let json = '{description: " A library that extends..   ", "spec{": "val[],:ue"}';
       let obj = $.jsonify(json);
-      expect(obj.description).to.equal(' A library that extends..   ');
+      expect(obj).to.eql({
+        description: ' A library that extends..   ',
+        'spec{': 'val[],:ue'
+      });
     });
     
     it('converts "naked" JSON into javascript object', () => {
-      let json = "{selector: .main > table, another: true, age: 23.55, blank:, arr: ['', ]}";
+      let json = "{selector: .main > table, another: true, age: 23.55, blank:, arr: [, ]}";
       expect($.jsonify(json)).to.eql({
         selector: '.main > table', 
         another: true, 
@@ -135,6 +138,11 @@ describe('jquery.extra', function() {
         married: false,
         address: null
       });
+    });
+    
+    it('throws an error if an invalid "naked" JSON is provided', () => {
+      let json = '{name: Dmi[riy, age{: 37}';
+      expect(() => $.jsonify(json)).to.throw(/Unexpected token/);
     });
   });
   
