@@ -4,7 +4,7 @@
 
 "naked" JSON is a JSON document without or with partially used quotation marks. 
 Embedding regular JSON into a text file that intrinsically requires a lot of
-double quotes may be combersome, will require extra typing, and may lead to 
+double quotes may be cumbersome, will require extra typing, and may lead to 
 errors.
 
 For example, if a developer wishes to embed a JSON document into an HTML file,
@@ -71,7 +71,7 @@ let obj = $.jsonify(json);
 ```
 
 * `$.jsonify` leaves double-quoted strings as is.  Any of the above behaviors
-of "naked" JSON can be overriden by enclosing either an object property or 
+of "naked" JSON can be overridden by enclosing either an object property or 
 some value in double quotes.
 
 ```javascript
