@@ -1,23 +1,24 @@
 let {expect} = require('chai');
-let jsdom = require("jsdom");
+let jsdom = require('jsdom');
 let path = require('path');
 let jqueryPath = path.resolve(__dirname, '../node_modules/jquery/dist/jquery.js');
 let extrasPath = path.resolve(__dirname, '../dist/extras.js');
 let $;
 
 describe('jquery.extra', function() {
-  this.timeout(5000);
+  this.timeout(10000);
   
-  before(function(done) {
+  before(done => {
     jsdom.env(
       `<input type = "text" value = "dmitriy" />
        <input type = "password" value = "password" name = "password" />
        <input id = "setter" />`,
       [jqueryPath, extrasPath],
-      function(err, window) {
+      (err, window) => {
         if(err) {
           console.error(err);
         }
+        
         ({$} = window);
         done();
       }

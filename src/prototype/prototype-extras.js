@@ -1,17 +1,16 @@
-import $            from 'jquery';
-import id_          from './lib/id';
-import setterGetter from './lib/attr-setter-getter';
-import toRx         from './lib/to-rx';
+import $               from 'jquery';
+import id_             from './lib/id';
+import patternAsserter from './lib/pattern-asserter';
+import setterGetter    from './lib/attr-setter-getter';
 
 let {val} = $.fn;
 
 $.extend($.fn, {
   attrValues(rx) {
     let {attributes} = this[0];
-    rx = toRx(rx);
     return [].reduce.call(attributes, (o, attribute) => {
       let {name, value} = attribute;
-      if(rx.test(name)) {
+      if(patternAsserter(name, rx)) {
         o[name] = value;
       }
       
@@ -20,11 +19,10 @@ $.extend($.fn, {
   },
 
   byAttrName(rx) {
-    rx = toRx(rx);
     return this.filter((idx, el) => {
       let {attributes} = el;
       for(let i = 0, len = attributes.length; i < len; i++) {
-        if(rx.test(attributes[i].name)) {
+        if(patternAsserter(attributes[i].name, rx)) {
           return true;
         }
       }
