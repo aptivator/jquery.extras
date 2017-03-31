@@ -198,4 +198,4 @@ let values = $('input').val();
 //values should be ['something else', 'password']
 ```
 
-[documentation]: docs/naked-json.md
+[documentation]: docs/NAKED-JSON.md
