@@ -135,8 +135,9 @@ if($('input').hasEvent('click')) {
 ```
 
 <span style = "font-size: 18px;">**`$.fn.id`**</span>: gets a value of an `id`
-attribute, sets an `id` to some specified value, or sets an `id` to an 
-auto-generated unique value.  (The function will be applied to the first element
+attribute, sets an `id` to some specified value, sets an `id` to an 
+auto-generated unique value, or overrides an existing `id` with an 
+auto-generated value.  (The function will be applied to the first element
 in the selection).
 
 ```html
@@ -145,6 +146,7 @@ in the selection).
 <input id = "some-id" type = "text" />
 <input type = "password"  name = "password" />
 <input type = "email" />
+<input id = "another-id" type = "checkbox" />
 ```
 ```javascript
 /* example.js */
@@ -155,8 +157,14 @@ let id = $('input:eq(0)').id();
 let id1 = $('[type = "password"]').id('password-id');
 //id1 shouldbe 'password-id'
 
-let id2 = $('input:last').id(true);
+let id2 = $('[type = "email"]').id(true);
 //id2 should be auto-generated and equal to 'jquery-extras-id-1'
+
+let id3 = $('input:last').id(true);
+//because id attribute exists, id3 should be 'another-id'
+
+let id4 = $('input:last').id(true, true);
+//id4 should be 'jquery-extras-id-2'; second true indicates to override an existing id
 ```
 
 <span style = "font-size: 18px;">**`$.fn.name`**</span>: gets and sets a value
