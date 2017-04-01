@@ -58,7 +58,7 @@ $.extend($.fn, {
       }
       id = id_();
     }
-    return setterGetter(this.eq(0), 'id', id);
+    return setterGetter($el, 'id', id);
   },
   
   name(name) {
