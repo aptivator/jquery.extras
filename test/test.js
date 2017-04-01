@@ -87,9 +87,19 @@ describe('jquery.extra', function() {
       expect(id).to.equal('setter');
     });
     
+    it('obtains a value of an element\'s id when in true mode', () => {
+      let id = $('input:last').id(true);
+      expect(id).to.equal('setter');
+    });
+    
+    it('overrides an existing id value with an auto-generated one', () => {
+      let id = $('input:last').id(true, true);
+      expect(id).to.equal('jquery-extras-id-1');
+    });
+    
     it('sets an id to an auto-generated unique value', () => {
       $('input').id(true);
-      expect($('input').id()).to.equal('jquery-extras-id-1');
+      expect($('input').id()).to.equal('jquery-extras-id-2');
     });
     
     it('sets an id attribute to a specified value', () => {
@@ -155,10 +165,9 @@ describe('jquery.extra', function() {
     
     it('sets a name attribute to a specified value', () => {
       let name = $('input:last').name($('input:last').id());
-      expect(name).to.equal('setter');
+      expect(name).to.equal('jquery-extras-id-1');
     });
   });
-
   
   describe('val()', () => {
     it('fetches value for one element', () => {

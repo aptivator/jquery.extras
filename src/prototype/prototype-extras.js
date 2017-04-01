@@ -46,8 +46,16 @@ $.extend($.fn, {
     return events[event];
   },
   
-  id(id) {
+  id(id, override) {
+    let $el = this.eq(0);
+    
     if(id === true) {
+      if(!override) {
+        id = setterGetter($el, 'id');
+        if(id) {
+          return id;
+        }
+      }
       id = id_();
     }
     return setterGetter(this.eq(0), 'id', id);
