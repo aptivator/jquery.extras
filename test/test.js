@@ -52,6 +52,11 @@ describe('jquery.extra', function() {
       value = $('input:first').attrArr('some-unknown-attr');
       expect(value).to.eql([undefined]);
     });
+    
+    it('should be chainable when attribute is being set', () => {
+      let value = $('div').attrArr('some-attribute', 'some value').attrArr('some-attribute');
+      expect(value).to.eql(['some value']);
+    });
   });
 
   describe('attrValues()', () => {
@@ -253,6 +258,11 @@ describe('jquery.extra', function() {
       $('input:last').removeAttr('value');
       value = $('div').valArr();
       expect(value).to.eql(['']);
+    });
+    
+    it('should be chainable after a value is set', () => {
+      let value = $('div').valArr('some value').valArr();
+      expect(value).to.eql(['some value']);
     });
   });
 });

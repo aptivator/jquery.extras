@@ -3,7 +3,7 @@ export default method =>
     let result = this[method](...args);
     
     if(result === this) {
-      return context;
+      return this;
     }
     
     if(!Array.isArray(result)) {
