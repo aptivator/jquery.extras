@@ -1,13 +1,3 @@
-export default function(...args) {
-  let result = this.attr(...args);
-  
-  if(result === this) {
-    return this;
-  }
-  
-  if(!Array.isArray(result)) {
-    result = [result];
-  }
-  
-  return result;
-}
+import arrayifier from '../../lib/arrayifier';
+
+export default arrayifier('attr');

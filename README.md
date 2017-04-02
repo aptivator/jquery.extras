@@ -276,5 +276,4 @@ let value1 = $('div').valArr();
 //value1 should be ['']
 ```
 
-
 [documentation]: docs/NAKED-JSON.md
