@@ -1,5 +1,5 @@
-import $ from 'jquery';
-
 export default function() {
-  return this.each((idx, el) => $(el).attr('disabled', 'disabled'));  
+  return this.each(function() {
+    $(this).attr('disabled', 'disabled');  
+  });
 }

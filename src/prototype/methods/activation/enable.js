@@ -1,5 +1,5 @@
-import $ from 'jquery';
-
 export default function() {
-  return this.each((idx, el) => $(el).removeAttr('disabled'));  
+  return this.each(function() {
+    $(this).removeAttr('disabled');  
+  });
 }

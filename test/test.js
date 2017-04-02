@@ -12,7 +12,8 @@ describe('jquery.extra', function() {
     jsdom.env(
       `<input type = "text" value = "dmitriy" />
        <input type = "password" value = "password" name = "password" />
-       <input id = "setter" />`,
+       <input id = "setter" />
+       <div></div>`,
       [jqueryPath, extrasPath],
       (err, window) => {
         window.console.log = console.log;
@@ -41,6 +42,15 @@ describe('jquery.extra', function() {
     
     it('throws an error if one of multiples in the selection does not have a requested attribute', () => {
       expect(() => $('input').attr('type')).to.throw(/elements does not have/);
+    });
+  });
+
+  describe('attrArr()', () => {
+    it('always returns an array', () => {
+      let value = $('input:first').attrArr('type');
+      expect(value).to.eql(['text']);
+      value = $('input:first').attrArr('some-unknown-attr');
+      expect(value).to.eql([undefined]);
     });
   });
 
@@ -233,6 +243,16 @@ describe('jquery.extra', function() {
     it('throws an error when same attribute value is used', () => {
       $('input:last').id('jquery-extras-id-2');
       expect(() => $('input').val('id', true)).to.throw(/already have a/);
+    });
+  });
+  
+  describe('valArr()', () => {
+    it('always returns an array', () => {
+      let value = $('input:last').valArr();
+      expect(value).to.eql(['same']);
+      $('input:last').removeAttr('value');
+      value = $('div').valArr();
+      expect(value).to.eql(['']);
     });
   });
 });

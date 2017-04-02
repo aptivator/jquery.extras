@@ -1,5 +1,5 @@
 import $       from 'jquery';
-import reducer from '../lib/reducer';
+import reducer from '../../lib/reducer';
 
 let {val} = $.fn;
 

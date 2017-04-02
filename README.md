@@ -58,6 +58,25 @@ let attrValue = $('input:last').attr('type');
 //attrValue should be 'undefined'
 ```
 
+<span style = "font-size: 18px">**`$.fn.attrArr`**</span>: wraps an overridden
+`attr` function and will return any primitive (returned by `attr`) as an array.
+
+```html
+<!-- example.html -->
+
+<input type = "text" />
+<input id = "something" />
+```
+```javascript
+/* example.js */
+
+let attrValue = $('input:first').attrArr('type');
+//attrValue should be ['text']
+
+let attrValue = $('input:last').attr('type');
+//attrValue should be [undefined]
+```
+
 <span style = "font-size: 18px">**`$.fn.attrValues`**</span>: selects a first 
 element's attributes, whose names match the provided pattern (string or regular
 expression), and returns an object of the matched attributes' names and values 
@@ -236,5 +255,26 @@ let values = $('input').val();
 let obj = $('input').val('id', true);
 //obj should be {username: 'something else', password: 'password'}
 ```
+
+<span style = "font-size: 18px">**`$.fn.valArr`**</span>: wraps an overridden
+`val` function and will return any primitive (returned by `val`) as an array.
+
+```html
+<!-- example.html -->
+
+<input id = "username" value = "something" />
+<input id = "password" value = "password" />
+<div></div>
+```
+```javascript
+/* example.js */
+
+let value = $('input:last').valArr();
+//value should be ['password']
+
+let value1 = $('div').valArr();
+//value1 should be ['']
+```
+
 
 [documentation]: docs/NAKED-JSON.md
