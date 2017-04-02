@@ -188,7 +188,8 @@ let password = $('[id = "password"]').name('password');
 
 <span style = "font-size: 18px;">**`$.fn.val`**</span>: overrides jquery's 
 native `val` function and implements a support to return an array of values
-when there is more than one element in the selection.
+when there is more than one element in the selection and also implements 
+functionality to return an object of values indexed by some attribute's value.
 
 ```html
 <!-- example.html -->
@@ -204,6 +205,9 @@ $('input').val('something else');
 
 let values = $('input').val();
 //values should be ['something else', 'password']
+
+let obj = $('input').val('id', true);
+//obj should be {username: 'something else', password: 'password'}
 ```
 
 [documentation]: docs/NAKED-JSON.md

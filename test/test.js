@@ -15,6 +15,7 @@ describe('jquery.extra', function() {
        <input id = "setter" />`,
       [jqueryPath, extrasPath],
       (err, window) => {
+        window.console.log = console.log;
         if(err) {
           console.error(err);
         }
@@ -175,15 +176,45 @@ describe('jquery.extra', function() {
       expect(value).to.equal('dmitriy');
     });
     
+    it('sets a value for an element using a function', () => {
+      let value = $('input:first').val((idx, value) => {
+        return value.toUpperCase();
+      }).val();
+      
+      expect(value).to.equal('DMITRIY');
+    });
+    
     it('fetches array of values for multiple elements', () => {
       let values = $('input').val();
-      expect(values).to.eql(['dmitriy', 'password', '']);
+      expect(values).to.eql(['DMITRIY', 'password', '']);
     });
     
     it('sets a value for the first element in the selection', () => {
-      $('input:last').val('setter');
-      let value = $('input:last').val();
+      let value = $('input:last').val('setter').val();
       expect(value).to.equal('setter');
+    });
+    
+    it('sets all inputs to the same value', () => {
+      let values = $('input').val('same').val();
+      expect(values).to.eql(['same', 'same', 'same']);
+    });
+    
+    it('retrieves all values indexing them by id attribute value', () => {
+      let values = $('input').val('id', true);
+      expect(values).to.eql({
+        'jquery-extras-id-1': 'same',
+        'jquery-extras-id-2': 'same',
+        'some-specified-id': 'same'
+      });
+    });
+    
+    it('throws an error when attribute does not exist', () => {
+      expect(() => $('input').val('name', true)).to.throw(/element has no value/);
+    });
+    
+    it('throws an error when same attribute value is used', () => {
+      $('input:last').id('jquery-extras-id-2');
+      expect(() => $('input').val('id', true)).to.throw(/already have a/);
     });
   });
 });
