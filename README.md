@@ -31,6 +31,33 @@ let obj = $.jsonify(nakedJson);
 
 ### Prototype methods
 
+<span style = "font-size: 18px">**`$.fn.attr`**</span>: overrides jquery's 
+native `attr` function and implements a support to return an array of attribute
+values when there is more than one element in the selection.
+
+```html
+<!-- example.html -->
+
+<input type = "text" />
+<input type = "text" />
+<input id = "something" />
+```
+```javascript
+/* example.js */
+
+let attrValue = $('input:first').attr('type');
+//attrValue should be 'text'
+
+let attrValues = $('input:nth-child(-n + 2)').attr('type');
+//attrValues should be ['text', 'text']
+
+let attrValues = $('input').attr('type');
+//should throw an error because one input does not have a type attribute
+
+let attrValue = $('input:last').attr('type');
+//attrValue should be 'undefined'
+```
+
 <span style = "font-size: 18px">**`$.fn.attrValues`**</span>: selects a first 
 element's attributes, whose names match the provided pattern (string or regular
 expression), and returns an object of the matched attributes' names and values 

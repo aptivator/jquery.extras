@@ -1,6 +1,6 @@
 {
   "name": "jquery.extras",
-  "version": "1.0.8",
+  "version": "1.1.8",
   "description": "A library that extends jquery object and prototype with extra methods",
   "main": "dist/extras.js",
   "jsnext:main": "dist/extras.es.js",

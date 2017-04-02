@@ -26,6 +26,24 @@ describe('jquery.extra', function() {
     );
   });
 
+  describe('attr()', () => {
+    it('fetches value for one element in the selection', () => {
+      expect($('input:first').attr('type')).to.equal('text');
+    });
+    
+    it('produces undefined for non-set attribute for one element in the selection', () => {
+      expect($('input:first').attr('some-attribute')).to.be.undefined;
+    });
+    
+    it('reteurns an array of attribute values when more than one element in the selection', () => {
+      expect($('input:nth-child(-n + 2)').attr('type')).to.eql(['text', 'password']);
+    });
+    
+    it('throws an error if one of multiples in the selection does not have a requested attribute', () => {
+      expect(() => $('input').attr('type')).to.throw(/elements does not have/);
+    });
+  });
+
   describe('attrValues()', () => {
     it('makes name-value object for element\'s attributes that begin with a specified string', () => {
       var obj = $('input').attrValues('type');
