@@ -4,7 +4,6 @@ import patternAsserter from './lib/pattern-asserter';
 import setterGetter    from './lib/attr-setter-getter';
 
 let {val} = $.fn;
-let reducer = [].reduce.call.bind([].reduce);
 
 $.extend($.fn, {
   attrValues(rx) {
@@ -69,7 +68,7 @@ $.extend($.fn, {
   val(value, asObj) {
     let valOnly = value && !asObj;
     let accumulator = asObj ? {} : value ? null : [];
-    let values = reducer($(this), function(accum, el) {
+    let values = [].reduce.call($(this), (accum, el) => {
       let $el = $(el);
       let result = val.apply($el, valOnly ? [value] : []);
       
