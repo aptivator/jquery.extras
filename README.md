@@ -73,8 +73,8 @@ let attrValue = $('input:last').attr('type');
 let attrValue = $('input:first').attrArr('type');
 //attrValue should be ['text']
 
-let attrValue = $('input:last').attrArr('type');
-//attrValue should be [undefined]
+let attrValue1 = $('input:last').attrArr('type');
+//attrValue1 should be [undefined]
 ```
 
 <span style = "font-size: 18px">**`$.fn.attrValues`**</span>: selects a first 
