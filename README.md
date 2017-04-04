@@ -26,7 +26,7 @@ following [documentation]).
 
 let nakedJson = $('input:first').attr('naked-json');
 let obj = $.jsonify(nakedJson);
-//obj should be {name: 'some name', age: 25, enrolled: null}
+//obj = {name: 'some name', age: 25, enrolled: null}
 ```
 
 ### Prototype methods
@@ -46,16 +46,16 @@ values when there is more than one element in the selection.
 /* example.js */
 
 let attrValue = $('input:first').attr('type');
-//attrValue should be 'text'
+//attrValue = 'text'
 
 let attrValues = $('input:nth-child(-n + 2)').attr('type');
-//attrValues should be ['text', 'text']
+//attrValues = ['text', 'text']
 
 let attrValues = $('input').attr('type');
 //should throw an error because one input does not have a type attribute
 
 let attrValue = $('input:last').attr('type');
-//attrValue should be 'undefined'
+//attrValue = 'undefined'
 ```
 
 <span style = "font-size: 18px">**`$.fn.attrArr`**</span>: wraps an overridden
@@ -71,34 +71,57 @@ let attrValue = $('input:last').attr('type');
 /* example.js */
 
 let attrValue = $('input:first').attrArr('type');
-//attrValue should be ['text']
+//attrValue = ['text']
 
 let attrValue1 = $('input:last').attrArr('type');
-//attrValue1 should be [undefined]
+//attrValue1 = [undefined]
 ```
 
 <span style = "font-size: 18px">**`$.fn.attrValues`**</span>: selects a first 
 element's attributes, whose names match the provided pattern (string or regular
 expression), and returns an object of the matched attributes' names and values 
-pairs.
+pairs.  Or, if an attribute name is provided as the second parameter, the 
+function will build a larger object mapping an object of matches attributes' 
+names and values to the value of the provided attribute name.
 
 ```html
 <!-- example.html -->
 
 <input type = "text" dn-property = "prop1" dn-extra = "extra" />
 <input type = "password" dn-method = "method" dn-extra = "something" />
+<input name = "some name" />
 ```
 ```javascript
 /* example-1.js */
 
 let obj = $('input').attrValues('dn-');
-//obj should be {'dn-property': 'prop1', 'dn-extra': 'extra'}
+//obj = {'dn-property': 'prop1', 'dn-extra': 'extra'}
 ```
 ```javascript
 /* example-2.js */
 
-let obj = $('input:last').attrValues(/extra$/);
-//obj should be {'dn-extra': 'something'}
+let obj = $('input:eq(1)').attrValues(/extra$/);
+//obj = {'dn-extra': 'something'}
+```
+```javascript
+/* example-3.js */
+
+let obj = $('input:nth-child(-n + 2)').attrValues('dn-', 'type')
+/* 
+  obj = {
+    text: {'dn-property': 'prop1', 'dn-extra': 'extra'},
+    password: {'dn-method': 'method', 'dn-extra': 'something'}
+  }
+*/
+```
+```javascript
+/* example-4.js */
+
+let obj = $('input').attrValues('dn-', 'type')
+//will throw an error because last input does not have a type attribute
+
+//to ignore elements with undefined hash attribute, add true as third parameter
+let obj = $('input').attrValues('dn-', 'type', true);
 ```
 
 <span style = "font-size: 18px;">**`$.fn.byAttrName`**</span>: filters selected
@@ -116,10 +139,10 @@ expression) and returns a collection of matched elements.
 /* example.js */
 
 let $pfaAll = $('div').byAttrName('pfa');
-//$pfaAll should the first two divs
+//$pfaAll = the first two divs
 
 let $pft = $('div').byAttrName(/^pft$/);
-//$pft should be the second div
+//$pft = the second div
 ```
 
 <span style = "font-size: 18px;">**`$.fn.disable`**</span>: disables all 
@@ -162,7 +185,7 @@ $('input').on('keyup', evt => {});
 $('input').on('click', evt => {});
 
 let events = $('input').events();
-//events should be {'keyup': {...}, 'click': {...}}
+//events = {'keyup': {...}, 'click': {...}}
 ```
 
 <span style = "font-size: 18px;">**`$.fn.hasEvent`**</span>: returns a specific 
@@ -198,19 +221,19 @@ in the selection).
 /* example.js */
 
 let id = $('input:eq(0)').id();
-//id should be 'some-id'
+//id = 'some-id'
 
 let id1 = $('[type = "password"]').id('password-id');
-//id1 shouldbe 'password-id'
+//id1 = 'password-id'
 
 let id2 = $('[type = "email"]').id(true);
 //id2 should be auto-generated and equal to 'jquery-extras-id-1'
 
 let id3 = $('input:last').id(true);
-//because id attribute exists, id3 should be 'another-id'
+//because id attribute exists, id3 = 'another-id'
 
 let id4 = $('input:last').id(true, true);
-//id4 should be 'jquery-extras-id-2'; second true indicates to override an existing id
+//id4 = 'jquery-extras-id-2'; second true indicates to override an existing id
 ```
 
 <span style = "font-size: 18px;">**`$.fn.name`**</span>: gets and sets a value
@@ -226,10 +249,10 @@ of a `name` attribute.
 /* example.js */
 
 let userName = $('input:eq(0)').name();
-//userName should be 'username'
+//userName = 'username'
 
 let password = $('[id = "password"]').name('password');
-//password should be 'password'
+//password = 'password'
 ```
 
 <span style = "font-size: 18px;">**`$.fn.val`**</span>: overrides jquery's 
@@ -250,10 +273,10 @@ $('input').val('something else');
 //first input's value should be 'something else'
 
 let values = $('input').val();
-//values should be ['something else', 'password']
+//values = ['something else', 'password']
 
 let obj = $('input').val('id', true);
-//obj should be {username: 'something else', password: 'password'}
+//obj = {username: 'something else', password: 'password'}
 ```
 
 <span style = "font-size: 18px">**`$.fn.valArr`**</span>: wraps an overridden
@@ -270,10 +293,10 @@ let obj = $('input').val('id', true);
 /* example.js */
 
 let value = $('input:last').valArr();
-//value should be ['password']
+//value = ['password']
 
 let value1 = $('div').valArr();
-//value1 should be ['']
+//value1 = ['']
 ```
 
 [documentation]: docs/NAKED-JSON.md

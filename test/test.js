@@ -69,6 +69,24 @@ describe('jquery.extra', function() {
       var obj = $('input').attrValues(/.*/);
       expect(obj).to.eql({type: 'text', value: 'dmitriy'});
     });
+    
+    it('maps name-value object for element\'s matched attributes to a larger object', () => {
+      var obj = $('input:nth-child(-n + 2)').attrValues('value', 'type');
+      expect(obj).to.eql({
+        text: {value: 'dmitriy'},
+        password: {value: 'password'}
+      });
+    });
+    
+    it('throws an error when attribute used as hash is undefined', () => {
+      var func = () => $('input').attrValues('value', 'type');
+      expect(func).to.throw(/one of the elements does not have a/);
+    });
+    
+    it('ignores an element whose hash attribute is undefined', () => {
+      var func = () => $('input').attrValues('value', 'type', true);
+      expect(func).to.not.throw(/one of the elements does not have a/);
+    });
   });
   
   describe('byAttrName()', () => {
@@ -99,7 +117,6 @@ describe('jquery.extra', function() {
     });
   });
 
-  
   describe('events()', () => {
     it('returns an object of events for the first element', () => {
       $('input:first').on('click', () => {});
