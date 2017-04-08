@@ -1,16 +1,19 @@
 let {expect} = require('chai');
 let dom = require('../lib/dom');
+let win;
 let $;
 
 describe('jsonify()', function() {
   this.timeout(5000);
   
   before(done => {
-    dom('').then($_ => {
-      $ = $_;
+    dom('').then(vars => {
+      [win, $] = vars;
       done();
     }).catch(done);
   });
+  
+  after(() => win.close());
   
   it('converts single-quote-prefixed values to strings', () => {
     let json = '{age: \'22, enrolled: \'true, senior: \'null}';

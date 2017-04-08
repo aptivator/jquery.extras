@@ -10,7 +10,7 @@ module.exports = (html, callback) => {
       if(err) {
         reject(err);
       }
-      resolve(window.$);
+      resolve([window, window.$]);
     });
   });
 };

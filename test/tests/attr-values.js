@@ -1,20 +1,23 @@
 let {expect} = require('chai');
 let dom = require('../lib/dom');
-let $;
 let html = `
   <input id = "aaa" type = "text" name = "first" value = "Dmitriy" />
   <input id = "aab" type = "text" name = "last" value = "Nesterkin" />
   <input />`;
+let win;
+let $;
 
 describe('attrValues()', function() {
   this.timeout(5000);
   
   before(done => {
-    dom(html).then($_ => {
-      $ = $_;
+    dom(html).then(vars => {
+      [win, $] = vars;
       done();
     }).catch(done);
   });
+  
+  after(() => win.close());
   
   it('assembles name-value object for string attribute pattern', () => {
     var obj = $('input').attrValues('type');

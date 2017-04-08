@@ -1,20 +1,23 @@
 let {expect} = require('chai');
 let dom = require('../lib/dom');
-let $;
 let html = `
   <input id = "aaa" type = "text" value = "first" />
   <input id = "aab" type = "text" value = "next" />
   <input />`;
+let win;
+let $;
 
 describe('val()', function() {
   this.timeout(5000);
   
   before(done => {
-    dom(html).then($_ => {
-      $ = $_;
+    dom(html).then(vars => {
+      [win, $] = vars;
       done();
     }).catch(done);
   });
+  
+  after(() => win.close());
   
   it('fetches value for one element', () => {
     let value = $('input:first').val();
